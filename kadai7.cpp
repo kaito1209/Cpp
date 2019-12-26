@@ -28,7 +28,19 @@ public:
     cout << "  " << name << "(会員) 会員番号:" << memberid << "\n";
   };
 };
-
+class stmember : public member{
+protected:
+  int memberid;
+  int grade;
+public:
+  void requestData(){
+    cout << "    学年を入力してください。\n    ";
+    cin >> grade;
+  };
+  void showData(){
+    cout << "  " << name << "(会員) 会員番号:" << memberid <<"(会員) 学年:"<<grade<< "\n";
+  };
+};
 class nonmember : public person {
   string email;
   string phone;
@@ -58,10 +70,16 @@ int main()
     cout << "  会員ですか？(y/n) \n  ";
     cin >> mtype;
     if(mtype == "y"){
-      q->participant = new member;
-    }else{
-      q->participant = new nonmember;
-    }
+    cout << "  学生ですか？(y/n) \n  ";
+    cin >> mtype;
+     if(mtype == "y"){
+       q->participant = new stmember;
+     }else{
+       q->participant = new member;
+     }
+     }else{
+       q->participant = new nonmember;
+     }
     q->participant->setName(name);
     q->participant->requestData();
     q->next = new par_node;
